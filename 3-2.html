@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="js/three.js"></script>
+<script src="js/Stats.js"></script>
+<script src="js/tween.min.js"></script>
+<body>
+
+<script>
+    var stats,renderer,camera,scene,light,mesh;
+    function initThree() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        renderer = new THREE.WebGLRenderer({antialias : true});
+        renderer.setSize(width,height);
+        document.body.appendChild(renderer.domElement);
+        renderer.setClearColor(0xffffff,1.0);
+
+        stats = new Stats();
+        stats.domElement.style.position = "absolute";
+        stats.domElement.style.left = "0px";
+        stats.domElement.style.top = "0px";
+        document.body.appendChild(stats.domElement);
+    }
+
+    function initCamera() {
+        camera = new THREE.PerspectiveCamera(45,width/height,1,10000);
+        camera.position.set(0,0,800);
+        camera.lookAt(new THREE.Vector3(0,0,0));
+    }
+
+    function initScene() {
+        scene = new THREE.Scene();
+    }
+
+    function initLight() {
+        light = new THREE.AmbientLight(0xFF0000);
+        light.position.set(100,400,100);
+        scene.add(light)
+
+        light = new THREE.PointLight(0x00FF00);
+        light.position.set(0,0,300);
+        scene.add(light);
+    }
+
+    function initObject(){
+        var geometry = new THREE.CylinderGeometry(100,150,400);
+        var material = new THREE.MeshLambertMaterial({color:0xFFFFFF});
+        mesh = new THREE.Mesh(geometry,material);
+//        mesh.position = new THREE.Vector3(0,0,0);
+        mesh.position = new THREE.Vector3(400,0,0);
+//        mesh.position.x = 400;
+        scene.add(mesh);
+    }
+
+    function threeStart(){
+        initThree();
+        initCamera();
+        initScene();
+        initLight();
+        initObject();
+        initTween();
+        animation();
+    }
+
+    function initTween(){
+        new TWEEN.Tween(mesh.position).to({x:-400},6000).repeat(Infinity).start();
+    }
+
+    function animation(){
+        renderer.render(scene,camera);
+        requestAnimationFrame(animation);
+
+        stats.update();
+        TWEEN.update();
+    }
+    threeStart();
+</script>
+</body>
+</html>

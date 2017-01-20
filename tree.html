@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/three.js"></script>
+</head>
+<body>
+
+<script>
+//     three.js 显示东西，我们需要三个东西：一个场景、一个摄像机、一个渲染器
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000)
+//  摄像头的四个参数：视野，宽高比 ，近剪裁平面和远剪裁平面
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+//    renderer.setClearColor(0xFFFFFF, 1.0);
+
+    var directionalLight = new THREE.DirectionalLight();
+    scene.add( directionalLight );
+
+    var geometry = new THREE.BoxGeometry(1,1,1);
+    var material = new THREE.MeshBasicMaterial({color:0x00ff00});
+    var cube = new THREE.Mesh(geometry,material)
+//调用 scene.add 添加的东西被添加到坐标（0,0,0）
+    scene.add( cube );
+//此时相机和立方体在彼此内部，需要移动相机的位置
+    camera.position.z = 5;
+//    渲染
+    function render() {
+        requestAnimationFrame( render );
+
+        cube.rotation.x += 0.1;
+        cube.rotation.y += 0.1;
+
+        renderer.render( scene, camera );
+    }
+    render();
+
+
+</script>
+
+</body>
+</html>
