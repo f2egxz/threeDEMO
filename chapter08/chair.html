@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./three.js"></script>
+    <script src="./Stats.js"></script>
+    <script src="./dat.gui.js"></script>
+    <script src="./controls.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function init() {
+        var stats = initStats()
+
+        var scene = new THREE.Scene();
+
+        var camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,1000);
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(new THREE.Color(0xEEEEEE,1.0));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+
+        document.body.appendChild(renderer.domElement);
+
+        camera.position.x = 0;
+        camera.position.y = 50;
+        camera.position.z = 100;
+//        camera.lookAt(new THREE.Vector3(0, 30, 0));
+
+//        创建相机控件，并绑到相机上
+        var camControls = new THREE.FirstPersonControls(camera);
+        camControls.lookSpeed = 0.4;
+        camControls.movementSpeed = 10;
+        camControls.noFly = true;
+        camControls.lookVertical = true;
+        camControls.constrainVertical = true;
+        camControls.verticalMin = 1.0;
+        camControls.verticalMax = 2.0;
+        camControls.lon = -15;
+        camControls.lat = 12;
+
+
+//        环境光
+        var ambientLight = new THREE.AmbientLight(0xffffff)
+        scene.add(ambientLight);
+
+//        聚光灯
+        var spotLight = new THREE.SpotLight(0x00ff00);
+        spotLight.position.set(-50, 70, -20);
+        spotLight.intensity = 2;
+        spotLight.angle = 0.2;
+        spotLight.distance = 200;
+        spotLight.decay = 1;
+        spotLight.castShadow = true;
+        scene.add(spotLight);
+
+
+//        聚光灯辅助线
+        var spotLightHelper = new THREE.SpotLightHelper( spotLight );
+        scene.add( spotLightHelper );
+
+//        地面
+        var planeGeometry = new THREE.PlaneGeometry(100, 100);
+        var planeMaterial = new THREE.MeshPhongMaterial({color: 0xCCCCCC});
+        planeMaterial.side = THREE.DoubleSide;
+        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        // rotate and position the plane
+        plane.rotation.x = -0.5 * Math.PI;
+        plane.position.x = 0;
+        plane.position.y = 0;
+        plane.position.z = 0;
+        plane.receiveShadow = true;
+        scene.add(plane);
+
+//        辅助线
+        var axes = new THREE.AxisHelper( 20,20,20 );
+        scene.add(axes);
+
+        var mesh;
+
+        var loader = new THREE.JSONLoader();
+        loader.load('./chair/misc_chair01.js', function (geometry, mat) {
+            mesh = new THREE.Mesh(geometry, mat[0]);
+            mesh.castShadow = true;
+
+            mesh.scale.x = 15;
+            mesh.scale.y = 15;
+            mesh.scale.z = 15;
+
+            scene.add(mesh);
+
+        },"./chair");
+
+
+        var clock = new THREE.Clock();
+        function render() {
+            stats.update();
+
+            var delta = clock.getDelta();
+            camControls.update(delta);
+
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+
+        render();
+
+
+        var controls = new function () {
+            // we need the first child, since it's a multimaterial
+
+
+        };
+
+        var gui = new dat.GUI();
+
+
+        function initStats() {
+            var stats = new Stats();
+            stats.setMode(0);
+
+            stats.domElement.style.position = "absolute";
+            stats.domElement.style.left = "0px";
+            stats.domElement.style.top = "0px";
+
+            document.body.appendChild(stats.domElement);
+
+            return stats;
+        }
+    }
+    init()
+</script>
+</body>
+</html>
