@@ -6,7 +6,7 @@
     <script src="./three.js"></script>
     <script src="./Stats.js"></script>
     <script src="./dat.gui.js"></script>
-    <script src="./controls.js"></script>
+    <script src="./Trackball.js"></script>
     <style>
         body {
             margin: 0;
@@ -33,20 +33,13 @@
         camera.position.x = 0;
         camera.position.y = 50;
         camera.position.z = 100;
-//        camera.lookAt(new THREE.Vector3(0, 30, 0));
-        camera.target = new THREE.Vector3( 0, 30, 0 );
+        camera.lookAt(new THREE.Vector3(0, 300, 0));
 
 //        创建相机控件，并绑到相机上
-        var camControls = new THREE.FirstPersonControls(camera);
-        camControls.lookSpeed = 0.4;
-        camControls.movementSpeed = 10;
-        camControls.noFly = true;
-        camControls.lookVertical = true;
-        camControls.constrainVertical = true;
-        camControls.verticalMin = 1.0;
-        camControls.verticalMax = 2.0;
-        camControls.lon = -15;
-        camControls.lat = 12;
+        var Controls = new THREE.TrackballControls(camera);
+        Controls.rotateSpeed = 1.0;
+        Controls.zoomSpeed = 1.0;
+        Controls.panSpeed = 1.0;
 
 
 //        环境光
@@ -106,7 +99,7 @@
             stats.update();
 
             var delta = clock.getDelta();
-            camControls.update(delta);
+            Controls.update(delta);
 
             requestAnimationFrame(render);
             renderer.render(scene, camera);
