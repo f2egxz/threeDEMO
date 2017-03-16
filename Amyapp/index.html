@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>background</title>
+    <style>
+        html, body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+
+<script src="./three.js"></script>
+<script src="./Stats.js"></script>
+<script>
+
+    init()
+
+    function init () {
+        var stats = initStats();
+
+        var text = "你好，小志",
+            height = 3,
+            size = 8,
+            curveSegments = 12,
+            bevelThickness = 10,
+            bevelSize = 3,
+            bevelSegments = 3,
+            bevelEnabled = false;
+
+        var scene = new THREE.Scene();
+
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000)
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(new THREE.Color(0x000000, 1.0));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+
+        document.body.appendChild(renderer.domElement);
+
+        camera.position.x = 10;
+        camera.position.y = 10;
+        camera.position.z = 40;
+        camera.lookAt(new THREE.Vector3(20,0,0));
+
+        var dirLight = new THREE.DirectionalLight();
+        dirLight.position.set(25, 23, 15);
+        scene.add(dirLight);
+
+        var dirLight2 = new THREE.DirectionalLight();
+        dirLight2.position.set(-25, 23, 15);
+        scene.add(dirLight2);
+
+        var material =  [
+            new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
+            new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+        ] ;
+        var Material = new THREE.PointsMaterial( { size: 0.5, color: 0x888888 } )
+
+
+        var loader = new THREE.FontLoader();
+        var textMesh = new THREE.Object3D()
+        loader.load(
+            './PangMenZhengDao_Regular.json',
+            function ( font ) {
+                var textGeo = new THREE.TextGeometry( text, {
+                    font: font,
+                    size: size,
+                    height: height,
+                    curveSegments: curveSegments,
+                    bevelThickness: bevelThickness,
+                    bevelSize: bevelSize,
+                    bevelEnabled: bevelEnabled,
+                    bevelSegments:bevelSegments
+                });
+                textMesh = new THREE.Mesh( textGeo, material );
+                textMesh.position.set(1, 1, 1)
+//                textMesh = new THREE.Points(textGeo, Material);
+                scene.add(textMesh)
+            }
+
+        );
+
+
+
+
+
+
+
+        render()
+
+        function render() {
+            stats.update();
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+
+
+        function initStats() {
+            var stats = new Stats();
+            stats.setMode(0);
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+            document.body.appendChild(stats.domElement);
+            return stats;
+        }
+    }
+
+</script>
+
+</body>
+</html>
