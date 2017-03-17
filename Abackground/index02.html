@@ -12,41 +12,70 @@
             overflow:hidden;
             text-align:center;
         }
+        .blog {
+            position: fixed;
+            top: 0;
+            left: -205px;
+            width: 200px;
+            height: 200px;
+            background-color: #CCC;
+        }
     </style>
 </head>
 <body>
-
+<div class="blog"></div>
 
 <script src="./three.js"></script>
 <script src="./Stats.js"></script>
 <script src="./dat.gui.js"></script>
-<script src="FirstPersonControls.js"></script>
+<script src="./FirstPersonControls.js"></script>
 <script>
     var config = new function () {
         this.title ={
+            font: './PangMenZhengDao_Regular.json',
             text : "你好，小志",
             height : 20,
             size : 50,
             curveSegments : 12,
             bevelThickness : 10,
-            bevelSize : 3,
+            bevelSize : 1,
             bevelSegments : 3,
             bevelEnabled : false,
             material:[
                 new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
                 new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
-            ]
+            ],
+            position:[200,0,1000],
+            rotation:[0,1,0],
+            scale:[1,1,1]
+        };
+        this.intrduce = {
+            font: './PangMenZhengDao_Regular.json',
+            text : "作者：",
+            size : 20,
+            height:30,
+            material:[
+                new THREE.MeshPhongMaterial( { color: 0x38291c, shading: THREE.FlatShading } ), // front
+                new THREE.MeshPhongMaterial( { color: 0xece3c1, shading: THREE.SmoothShading } ) // side
+            ],
+            position:[400,0,600],
+            rotation:[0,1.2,0],
         }
     };
+    var WIDTH = (window.innerWidth+200)/155;
+    var HEIGHT = (window.innerHeight+200)/110;
     init()
     function init () {
-        var stats = initStats()
+        var stats = initStats();
+
+//------------------------------------------
         var scene = new THREE.Scene();
         scene.background = new THREE.CubeTextureLoader()
             .setPath( './bgc05/' )
             .load(  [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ]  );
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
         var cameraControls = new THREE.FirstPersonControls(camera);
+
 
         var renderer = new THREE.WebGLRenderer();
         renderer.setClearColor(new THREE.Color(0xffffff, 1.0));
@@ -59,33 +88,112 @@
         camera.position.y = 100;
         camera.position.z = 100;
         scene.add( camera );
-
-        var ambientLight = new THREE.AmbientLight(0xffffff)
-        scene.add(ambientLight);
-
-
-        var Fontloader = new THREE.FontLoader();
-        var titleMesh = new THREE.Object3D();
-        Fontloader.load(
-            './PangMenZhengDao_Regular.json',
-            function ( font ) {
-                var titleGeo = new THREE.TextGeometry( config.title.text, {
-                    font: font,
-                    size: config.title.size,
-                    height: config.title.height,
-                    curveSegments: config.title.curveSegments,
-                    bevelThickness: config.title.bevelThickness,
-                    bevelSize: config.title.bevelSize,
-                    bevelEnabled: config.title.bevelEnabled,
-                    bevelSegments: config.title.bevelSegments
-                });
-                titleMesh = new THREE.Mesh( titleGeo, config.title.material );
-                titleMesh.position.set(100, 100, 1000);
-                scene.add(titleMesh)
-            }
-        );
+//      add plane
+        var planeGeometry = new THREE.PlaneGeometry(800, 1000);
+        var planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.receiveShadow = true;
+        // rotate and position the plane
+        plane.rotation.x = -0.5 * Math.PI;
+        plane.position.x = 0;
+        plane.position.y = 0;
+        plane.position.z = 900;
+        scene.add(plane)
 
 
+//        var ambientLight = new THREE.AmbientLight(0xffffff)
+//        scene.add(ambientLight);
+
+//        var directionalLight = new THREE.DirectionalLight(0xff0000);
+//        directionalLight.position.set(-300, 250, 1000);
+//        directionalLight.castShadow = true;
+//        scene.add(directionalLight);
+//        var dirhelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
+//        scene.add( dirhelper );
+
+        var targetObject = new THREE.Object3D();
+        targetObject.position.set(0,0,9000)
+        scene.add(targetObject);
+
+
+        var spotLight = new THREE.SpotLight( 0xffffff,1 );
+        spotLight.position.set( -500, 130, 450 );
+        spotLight.castShadow = true;
+        scene.add( spotLight );
+        spotLight.target = plane;
+
+        var spotLightHelper = new THREE.SpotLightHelper( spotLight );
+        scene.add( spotLightHelper );
+
+        fontRender(config.title);
+        fontRender(config.intrduce);
+
+        /**
+         * 渲染文字
+         * @param config
+         *         config.font { url} 必须的 文字字体路径
+         *         config.text { string} 必须的 要渲染的文字
+         *         config.size  { num float} 必须的 文字大小
+         *         config.material { array } 必须的 文字的材料
+         *         config.height { num float} 默认50 文字的厚度，
+         *         config.curveSegments { num Integer} 默认12  曲线上点的个数
+         *         config.bevelEnabled  { bool} 默认false  是否打开斜面
+         *         config.bevelThickness{ num float} 默认10  如何深入文本斜面
+         *         config.bevelSize     { num float} 默认8  离文本轮廓多远
+         *         config.bevelSegments { num Integer} 默认3  锥段数
+         *         config.position { array } 默认[0,0,0] 位置
+         *         config.rotation { array } 默认[0,0,0] 旋转
+         *         config.scale    { array } 默认[1,1,1] 缩放
+         */
+        function fontRender (config) {
+            const Fontloader = new THREE.FontLoader();
+            let Mesh = new THREE.Object3D();
+            Fontloader.load(
+                config.font,
+                function ( font ) {
+                    const _height = config.height||50;
+                    const _curveSegments  = config.curveSegments || 12;
+                    const _bevelEnabled   = config.bevelEnabled || false;
+                    const _bevelThickness = config.bevelThickness || 10;
+                    const _bevelSize      = config.bevelSize || 8;
+                    const _bevelSegments  = config.bevelSegments || 3;
+                    const Geo = new THREE.TextGeometry( config.text, {
+                        font: font,
+                        size: config.size,
+                        height: _height,
+                        curveSegments: _curveSegments,
+                        bevelThickness: _bevelThickness,
+                        bevelSize: _bevelSize,
+                        bevelEnabled: _bevelEnabled,
+                        bevelSegments: _bevelSegments
+                    });
+                    Mesh = new THREE.Mesh( Geo, config.material );
+                    const _position = config.position||[0,0,0];
+                    Mesh.position.x = _position[0];
+                    Mesh.position.y = _position[1];
+                    Mesh.position.z = _position[2];
+                    const _rotation = config.rotation||[0,0,0];
+                    Mesh.rotation.x = _rotation[0]*Math.PI;
+                    Mesh.rotation.y = _rotation[1]*Math.PI;
+                    Mesh.rotation.z = _rotation[2]*Math.PI;
+                    const _scale = config.scale||[1,1,1];
+                    Mesh.scale.x = _scale[0];
+                    Mesh.scale.y = _scale[1];
+                    Mesh.scale.z = _scale[2];
+                    Mesh.castShadow = true;
+                    scene.add(Mesh)
+                }
+            );
+        }
+
+//        改变屏幕大小时执行
+        window.addEventListener( 'resize', onWindowResize, false );
+        function onWindowResize() {
+            cameraControls = new THREE.FirstPersonControls(camera);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+        }
 
 
 
@@ -93,12 +201,21 @@
         render();
         function render() {
             stats.update();
+            spotLightHelper.update();
+            blogPosition(cameraControls.cameraTarget);
 
             var delta = clock.getDelta();
             cameraControls.update(delta)
-
             requestAnimationFrame(render);
             renderer.render(scene, camera);
+        }
+
+        function blogPosition(lookat) {
+//            判断进入该区域显示内容。
+            if(-80<lookat.x&&lookat.x<77&&40<lookat.y&&lookat.y<170&&-40<lookat.z&&lookat.z<45){
+                document.querySelector('.blog').style.left =-200 + (77-lookat.x)*WIDTH +'px';
+                document.querySelector('.blog').style.top =-200 + (lookat.y-50)*HEIGHT +'px';
+            }
         }
 
 
@@ -113,6 +230,9 @@
             return stats;
         }
     }
+</script>
+<script>
+
 </script>
 </body>
 </html>

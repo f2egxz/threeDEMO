@@ -2,32 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ddda7222-a6a5-441c-b8b9-979ece03b001" name="默认" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/FirstPersonControls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/index02.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Amyapp/index2.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Amyapp/tween.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/Stats.js" afterPath="$PROJECT_DIR$/Amyapp/Stats.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/dat.gui.js" afterPath="$PROJECT_DIR$/Amyapp/dat.gui.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/LICENSE" afterPath="$PROJECT_DIR$/Amyapp/fonts/LICENSE" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/bitstream_vera_sans_mono_roman.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/bitstream_vera_sans_mono_roman.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/droid/NOTICE" afterPath="$PROJECT_DIR$/Amyapp/fonts/droid/NOTICE" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/droid/README.txt" afterPath="$PROJECT_DIR$/Amyapp/fonts/droid/README.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/droid/droid_sans_bold.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/droid/droid_sans_bold.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/droid/droid_sans_mono_regular.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/droid/droid_sans_mono_regular.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/droid/droid_sans_regular.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/droid/droid_sans_regular.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/droid/droid_serif_bold.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/droid/droid_serif_bold.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/droid/droid_serif_regular.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/droid/droid_serif_regular.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/gentilis_bold.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/gentilis_bold.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/gentilis_regular.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/gentilis_regular.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/helvetiker_bold.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/helvetiker_bold.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/helvetiker_regular.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/helvetiker_regular.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/optimer_bold.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/optimer_bold.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/fonts/optimer_regular.typeface.js" afterPath="$PROJECT_DIR$/Amyapp/fonts/optimer_regular.typeface.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/index.html" afterPath="$PROJECT_DIR$/Amyapp/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/myapp/three.js" afterPath="$PROJECT_DIR$/Amyapp/three.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/test.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/three17.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chapter01/04-animation.html" afterPath="$PROJECT_DIR$/chapter01/04-animation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Abackground/FirstPersonControls.js" afterPath="$PROJECT_DIR$/Abackground/FirstPersonControls.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Abackground/index02.html" afterPath="$PROJECT_DIR$/Abackground/index02.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -51,8 +30,37 @@
       <file leaf-file-name="index02.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Abackground/index02.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="82" column="50" lean-forward="false" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
+            <state relative-caret-position="276">
+              <caret line="114" column="43" lean-forward="true" selection-start-line="114" selection-start-column="43" selection-end-line="114" selection-end-column="43" />
+              <folding>
+                <element signature="e#729#1867#0" expanded="false" />
+                <element signature="e#4308#5137#0" expanded="false" />
+                <element signature="e#5175#7113#0" expanded="false" />
+                <element signature="e#7237#7500#0" expanded="false" />
+                <element signature="e#7930#8267#0" expanded="false" />
+                <element signature="e#8300#8616#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Abackground/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+              <folding>
+                <element signature="e#2748#3032#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="three17.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Abackground/three17.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,12 +78,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setDuration</find>
-      <find>Stats</find>
-      <find>loadFont</find>
-      <find>load</find>
-      <find>export</find>
-      <find>textMesh</find>
       <find>curveSegments</find>
       <find>three.js</find>
       <find>position</find>
@@ -100,6 +102,12 @@
       <find>lookat</find>
       <find>key</find>
       <find>z</find>
+      <find>return</find>
+      <find>activeLook</find>
+      <find>constrainVertical</find>
+      <find>cameraTarget</find>
+      <find>inn</find>
+      <find>target</find>
     </findStrings>
     <replaceStrings>
       <replace>MeshLambertMaterial</replace>
@@ -151,8 +159,10 @@
         <option value="$PROJECT_DIR$/Amyapp/tween.js" />
         <option value="$PROJECT_DIR$/Abackground/index.html" />
         <option value="$PROJECT_DIR$/Abackground/DragController.js" />
-        <option value="$PROJECT_DIR$/Abackground/FirstPersonControls.js" />
         <option value="$PROJECT_DIR$/Amyapp/index.html" />
+        <option value="$PROJECT_DIR$/Abackground/FirstPersonControls.js" />
+        <option value="$PROJECT_DIR$/Abackground/three17.js" />
+        <option value="$PROJECT_DIR$/Abackground/test.html" />
         <option value="$PROJECT_DIR$/Abackground/index02.html" />
       </list>
     </option>
@@ -164,10 +174,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="82" />
-    <option name="y" value="46" />
-    <option name="width" value="1423" />
-    <option name="height" value="779" />
+    <option name="x" value="96" />
+    <option name="y" value="45" />
+    <option name="width" value="1264" />
+    <option name="height" value="774" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -184,6 +194,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -206,28 +217,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="chapter01" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webGL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webGL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Amyapp" />
+              <option name="myItemId" value="Abackground" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -347,17 +343,18 @@
       <workItem from="1489568900022" duration="1559000" />
       <workItem from="1489625211455" duration="2386000" />
       <workItem from="1489632034283" duration="22510000" />
+      <workItem from="1489712091897" duration="27597000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103425000" />
+    <option name="totallyTimeSpent" value="131022000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="82" y="46" width="1423" height="779" extended-state="1" />
-    <editor active="true" />
+    <frame x="96" y="45" width="1264" height="774" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18123667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1826923" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -386,27 +383,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Abackground/index02.html</url>
-          <line>84</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/creating text.html" />
-    <entry file="file://$PROJECT_DIR$/3.1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1422">
-          <caret line="79" column="24" lean-forward="false" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/3-2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -678,9 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="562">
           <caret line="881" column="9" lean-forward="false" selection-start-line="881" selection-start-column="9" selection-end-line="881" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#276#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -688,9 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="88" column="22" lean-forward="false" selection-start-line="88" selection-start-column="17" selection-end-line="88" selection-end-column="22" />
-          <folding>
-            <element signature="e#441#2970#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -710,25 +685,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Abackground/FirstPersonControls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3450">
-          <caret line="184" column="6" lean-forward="true" selection-start-line="184" selection-start-column="6" selection-end-line="184" selection-end-column="6" />
-          <folding>
-            <element signature="e#1095#1411#0" expanded="false" />
-            <element signature="e#1634#1991#0" expanded="false" />
-            <element signature="e#2036#2403#0" expanded="false" />
-            <element signature="e#4664#4705#0" expanded="false" />
-            <element signature="e#4737#5068#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chapter01/04-animation.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -752,11 +712,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Abackground/FirstPersonControls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="60" lean-forward="false" selection-start-line="0" selection-start-column="60" selection-end-line="0" selection-end-column="60" />
+          <folding>
+            <element signature="e#60#5750#0" expanded="false" />
+            <element signature="e#1661#2018#0" expanded="false" />
+            <element signature="e#2063#2430#0" expanded="false" />
+            <element signature="e#4734#4775#0" expanded="false" />
+            <element signature="e#4807#5138#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Abackground/three17.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Abackground/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+          <folding>
+            <element signature="e#2748#3032#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Abackground/index02.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="82" column="50" lean-forward="false" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
-          <folding />
+        <state relative-caret-position="276">
+          <caret line="114" column="43" lean-forward="true" selection-start-line="114" selection-start-column="43" selection-end-line="114" selection-end-column="43" />
+          <folding>
+            <element signature="e#729#1867#0" expanded="false" />
+            <element signature="e#4308#5137#0" expanded="false" />
+            <element signature="e#5175#7113#0" expanded="false" />
+            <element signature="e#7237#7500#0" expanded="false" />
+            <element signature="e#7930#8267#0" expanded="false" />
+            <element signature="e#8300#8616#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

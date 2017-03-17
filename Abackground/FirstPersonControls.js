@@ -1,5 +1,5 @@
 THREE.FirstPersonControls = function ( object, domElement ) {
-
+    this.cameraTarget = '';
     this.object = object;
     this.target = new THREE.Vector3( 0, 0, 0 );
 
@@ -181,7 +181,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
         targetPosition.z = position.z + 100 * Math.sin( this.phi ) * Math.sin( this.theta );
         // console.log(targetPosition);
         this.object.lookAt( targetPosition );
-
+        this.cameraTarget = targetPosition;
     };
 
     function contextmenu( event ) {
