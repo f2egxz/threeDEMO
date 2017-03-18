@@ -25,6 +25,10 @@
 <body>
 <div class="blog"></div>
 
+<video id="video" style="display: none; position: absolute; left: 15px; top: 75px;"
+       src="./Lil%20Uzi%20Vert%20-%20Go%20Off.mp4" controls="true" autoplay="true" loop></video>
+
+
 <script src="./three.js"></script>
 <script src="./Stats.js"></script>
 <script src="./dat.gui.js"></script>
@@ -33,33 +37,50 @@
     var config = new function () {
         this.title ={
             font: './PangMenZhengDao_Regular.json',
-            text : "你好，小志",
+            text : "你好小志",
             height : 20,
-            size : 50,
+            size : 100,
             curveSegments : 12,
             bevelThickness : 10,
             bevelSize : 1,
             bevelSegments : 3,
             bevelEnabled : false,
             material:[
-                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
-                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+                new THREE.MeshPhongMaterial( { color: 0xcccccc, envMap: new THREE.CubeTextureLoader()
+                    .setPath( './bgc05/' )
+                    .load(  [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ]  ) } ), // front
+                new THREE.MeshPhongMaterial( { color: 0xffffff,  envMap: new THREE.CubeTextureLoader()
+                    .setPath( './bgc05/' )
+                    .load(  [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ]  ) }  ) // side
             ],
-            position:[200,0,1000],
-            rotation:[0,1,0],
+            position:[400,-20,800],
+            rotation:[0,1.1,0],
             scale:[1,1,1]
         };
-        this.intrduce = {
+        this.author = {
             font: './PangMenZhengDao_Regular.json',
             text : "作者：",
             size : 20,
             height:30,
             material:[
-                new THREE.MeshPhongMaterial( { color: 0x38291c, shading: THREE.FlatShading } ), // front
-                new THREE.MeshPhongMaterial( { color: 0xece3c1, shading: THREE.SmoothShading } ) // side
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
             ],
             position:[400,0,600],
             rotation:[0,1.2,0],
+        };
+        this.zhi = {
+            font: './PangMenZhengDao_Regular.json',
+            text : "小志",
+            size : 20,
+            height:30,
+            material:[
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+            ],
+            /*envMap: cubeCamera.renderTarget.texture }*/
+            position:[-300,0,600],
+            rotation:[0,0.8,0],
         }
     };
     var WIDTH = (window.innerWidth+200)/155;
@@ -73,60 +94,79 @@
         scene.background = new THREE.CubeTextureLoader()
             .setPath( './bgc05/' )
             .load(  [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ]  );
+
         var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
         var cameraControls = new THREE.FirstPersonControls(camera);
+        camera.position.set(0,100,100);
+        scene.add(camera);
 
-
-        var renderer = new THREE.WebGLRenderer();
+        var renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setClearColor(new THREE.Color(0xffffff, 1.0));
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.shadowMap.enabled = true;
-
         document.body.appendChild(renderer.domElement);
 
-        camera.position.x = 0;
-        camera.position.y = 100;
-        camera.position.z = 100;
-        scene.add( camera );
+//     add video
+        var video = document.getElementById('video');
+        var videoTexture = new THREE.VideoTexture(video);
+        videoTexture.minFilter = THREE.LinearFilter;
+        videoTexture.magFilter = THREE.LinearFilter;
 //      add plane
-        var planeGeometry = new THREE.PlaneGeometry(800, 1000);
-        var planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+        var planeGeometry = new THREE.PlaneGeometry(300, 200);
+        var planeMaterial = new THREE.MeshLambertMaterial({map: videoTexture,side: THREE.DoubleSide});
         var plane = new THREE.Mesh(planeGeometry, planeMaterial);
         plane.receiveShadow = true;
         // rotate and position the plane
-        plane.rotation.x = -0.5 * Math.PI;
-        plane.position.x = 0;
-        plane.position.y = 0;
-        plane.position.z = 900;
+        plane.rotation.y = 0.5 * Math.PI;
+        plane.position.set(-400,137,-200)
         scene.add(plane)
 
 
 //        var ambientLight = new THREE.AmbientLight(0xffffff)
 //        scene.add(ambientLight);
 
-//        var directionalLight = new THREE.DirectionalLight(0xff0000);
-//        directionalLight.position.set(-300, 250, 1000);
-//        directionalLight.castShadow = true;
-//        scene.add(directionalLight);
-//        var dirhelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
-//        scene.add( dirhelper );
-
         var targetObject = new THREE.Object3D();
-        targetObject.position.set(0,0,9000)
+        targetObject.position.set(0,0,900)
         scene.add(targetObject);
 
 
         var spotLight = new THREE.SpotLight( 0xffffff,1 );
+//        spotLight.angle = 0.5
         spotLight.position.set( -500, 130, 450 );
         spotLight.castShadow = true;
         scene.add( spotLight );
-        spotLight.target = plane;
-
+        spotLight.target = targetObject;
         var spotLightHelper = new THREE.SpotLightHelper( spotLight );
         scene.add( spotLightHelper );
 
+        var pointLight01 = new THREE.PointLight(0xffd990);
+        pointLight01.position.set(450,40,650);
+        scene.add( pointLight01 );
+        var pointLightHelper01 = new THREE.PointLightHelper( pointLight01, 3 );
+        scene.add( pointLightHelper01 );
+
+        var pointLight02 = new THREE.PointLight(0xf3cc95);
+        pointLight02.position.set(450,20,800);
+        scene.add( pointLight02 );
+        var pointLightHelper02 = new THREE.PointLightHelper( pointLight02, 3 );
+        scene.add( pointLightHelper02 );
+
+        var pointLight03 = new THREE.PointLight(0xeaab7c);
+        pointLight03.position.set(-450,20,470);
+        scene.add( pointLight03 );
+        var pointLightHelper03 = new THREE.PointLightHelper( pointLight03, 3 );
+        scene.add( pointLightHelper03 );
+
+        var pointLight04 = new THREE.PointLight(0xff0000);
+        pointLight04.position.set(-450,20,850);
+        scene.add( pointLight04 );
+        var pointLightHelper04 = new THREE.PointLightHelper( pointLight04, 3 );
+        scene.add( pointLightHelper04 );
+
         fontRender(config.title);
-        fontRender(config.intrduce);
+        fontRender(config.author);
+        fontRender(config.zhi);
 
         /**
          * 渲染文字

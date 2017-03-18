@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ddda7222-a6a5-441c-b8b9-979ece03b001" name="默认" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/test.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/three17.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Abackground/physijs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Aphysijs/index01.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Aphysijs/index02.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Aphysijs/index03.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Abackground/FirstPersonControls.js" afterPath="$PROJECT_DIR$/Abackground/FirstPersonControls.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Abackground/index02.html" afterPath="$PROJECT_DIR$/Abackground/index02.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -27,40 +29,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index02.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Abackground/index02.html">
+      <file leaf-file-name="index02.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Aphysijs/index02.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="114" column="43" lean-forward="true" selection-start-line="114" selection-start-column="43" selection-end-line="114" selection-end-column="43" />
+            <state relative-caret-position="248">
+              <caret line="147" column="10" lean-forward="true" selection-start-line="147" selection-start-column="10" selection-end-line="147" selection-end-column="10" />
               <folding>
-                <element signature="e#729#1867#0" expanded="false" />
-                <element signature="e#4308#5137#0" expanded="false" />
-                <element signature="e#5175#7113#0" expanded="false" />
-                <element signature="e#7237#7500#0" expanded="false" />
-                <element signature="e#7930#8267#0" expanded="false" />
-                <element signature="e#8300#8616#0" expanded="false" />
+                <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="e#1029#5652#0" expanded="false" />
+                <element signature="e#5683#5820#0" expanded="false" />
+                <element signature="e#5857#7113#0" expanded="false" />
+                <element signature="e#7159#9838#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Abackground/test.html">
+      <file leaf-file-name="index03.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Aphysijs/index03.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
-              <folding>
-                <element signature="e#2748#3032#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="three17.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Abackground/three17.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+            <state relative-caret-position="250">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -71,22 +60,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>curveSegments</find>
-      <find>three.js</find>
-      <find>position</find>
-      <find>color</find>
-      <find>controls</find>
-      <find>FontLoader</find>
-      <find>car</find>
-      <find>uniforms</find>
-      <find>MeshDepthMaterial</find>
       <find>material_depth</find>
       <find>initPostprocessing</find>
       <find>onDocumentMouseMove</find>
@@ -108,6 +88,15 @@
       <find>cameraTarget</find>
       <find>inn</find>
       <find>target</find>
+      <find>scale</find>
+      <find>-50</find>
+      <find>requestAnimationFrame</find>
+      <find>getPoints</find>
+      <find>stepX</find>
+      <find>image</find>
+      <find>shadow</find>
+      <find>receive</find>
+      <find>points</find>
     </findStrings>
     <replaceStrings>
       <replace>MeshLambertMaterial</replace>
@@ -163,7 +152,12 @@
         <option value="$PROJECT_DIR$/Abackground/FirstPersonControls.js" />
         <option value="$PROJECT_DIR$/Abackground/three17.js" />
         <option value="$PROJECT_DIR$/Abackground/test.html" />
+        <option value="$PROJECT_DIR$/Abackground/physijs.html" />
         <option value="$PROJECT_DIR$/Abackground/index02.html" />
+        <option value="$PROJECT_DIR$/Aphysijs/index01.html" />
+        <option value="$PROJECT_DIR$/Aphysijs/index02.html" />
+        <option value="$PROJECT_DIR$/index03.html" />
+        <option value="$PROJECT_DIR$/Aphysijs/index03.html" />
       </list>
     </option>
   </component>
@@ -174,10 +168,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="96" />
-    <option name="y" value="45" />
+    <option name="x" value="18" />
+    <option name="y" value="96" />
     <option name="width" value="1264" />
-    <option name="height" value="774" />
+    <option name="height" value="654" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -194,6 +188,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -217,13 +212,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Abackground" />
+              <option name="myItemId" value="Aphysijs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -344,15 +338,16 @@
       <workItem from="1489625211455" duration="2386000" />
       <workItem from="1489632034283" duration="22510000" />
       <workItem from="1489712091897" duration="27597000" />
+      <workItem from="1489797524336" duration="25569000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131022000" />
+    <option name="totallyTimeSpent" value="156591000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="96" y="45" width="1264" height="774" extended-state="0" />
-    <editor active="false" />
+    <frame x="18" y="96" width="1264" height="654" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1826923" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -383,40 +378,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="20" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Abackground/index02.html</url>
+          <line>243</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/3-2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tree.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="28" column="19" lean-forward="false" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebGL浏览器兼容性测试.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/3-1.html" />
-    <entry file="file://$PROJECT_DIR$/3.1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="79" column="24" lean-forward="false" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/node_modules/dat.gui/build/dat.gui.min.js" />
     <entry file="file://$PROJECT_DIR$/js/dat.gui.min.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -635,7 +609,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
           <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -651,7 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1944">
           <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -681,14 +653,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
           <caret line="30" column="33" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="30" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chapter01/04-animation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -728,34 +692,94 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Abackground/three17.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+        <state relative-caret-position="400">
+          <caret line="184" column="49" lean-forward="true" selection-start-line="184" selection-start-column="49" selection-end-line="184" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Abackground/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+        <state relative-caret-position="2250">
+          <caret line="90" column="25" lean-forward="false" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
           <folding>
             <element signature="e#2748#3032#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Abackground/physijs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Abackground/index02.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="114" column="43" lean-forward="true" selection-start-line="114" selection-start-column="43" selection-end-line="114" selection-end-column="43" />
+        <state relative-caret-position="224">
+          <caret line="118" column="21" lean-forward="false" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="21" />
           <folding>
-            <element signature="e#729#1867#0" expanded="false" />
-            <element signature="e#4308#5137#0" expanded="false" />
-            <element signature="e#5175#7113#0" expanded="false" />
-            <element signature="e#7237#7500#0" expanded="false" />
-            <element signature="e#7930#8267#0" expanded="false" />
-            <element signature="e#8300#8616#0" expanded="false" />
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#video#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#1916#2365#0" expanded="false" />
+            <element signature="e#2386#2893#0" expanded="false" />
+            <element signature="e#6353#7182#0" expanded="false" />
+            <element signature="e#7897#8306#0" expanded="false" />
+            <element signature="e#9282#9545#0" expanded="false" />
+            <element signature="e#9975#10312#0" expanded="false" />
+            <element signature="e#10345#10661#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chapter01/04-animation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="55" column="33" lean-forward="true" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index03.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="11" lean-forward="false" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Aphysijs/index01.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#4202#4705#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Aphysijs/index02.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="147" column="10" lean-forward="true" selection-start-line="147" selection-start-column="10" selection-end-line="147" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="e#1029#5652#0" expanded="false" />
+            <element signature="e#5683#5820#0" expanded="false" />
+            <element signature="e#5857#7113#0" expanded="false" />
+            <element signature="e#7159#9838#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Aphysijs/index03.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="67" />
+          <folding />
         </state>
       </provider>
     </entry>
