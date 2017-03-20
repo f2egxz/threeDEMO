@@ -126,6 +126,7 @@
 //        var ambientLight = new THREE.AmbientLight(0xffffff)
 //        scene.add(ambientLight);
 
+//        spotlight target
         var targetObject = new THREE.Object3D();
         targetObject.position.set(0,0,900)
         scene.add(targetObject);
@@ -167,6 +168,30 @@
         fontRender(config.title);
         fontRender(config.author);
         fontRender(config.zhi);
+
+//        改变屏幕大小时执行
+        window.addEventListener( 'resize', onWindowResize, false );
+        function onWindowResize() {
+            cameraControls = new THREE.FirstPersonControls(camera);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+        }
+
+
+
+        var clock = new THREE.Clock();
+        render();
+        function render() {
+            stats.update();
+            spotLightHelper.update();
+            blogPosition(cameraControls.cameraTarget);
+
+            var delta = clock.getDelta();
+            cameraControls.update(delta)
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
 
         /**
          * 渲染文字
@@ -226,49 +251,27 @@
             );
         }
 
-//        改变屏幕大小时执行
-        window.addEventListener( 'resize', onWindowResize, false );
-        function onWindowResize() {
-            cameraControls = new THREE.FirstPersonControls(camera);
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth, window.innerHeight );
-        }
+    }
 
-
-
-        var clock = new THREE.Clock();
-        render();
-        function render() {
-            stats.update();
-            spotLightHelper.update();
-            blogPosition(cameraControls.cameraTarget);
-
-            var delta = clock.getDelta();
-            cameraControls.update(delta)
-            requestAnimationFrame(render);
-            renderer.render(scene, camera);
-        }
-
-        function blogPosition(lookat) {
+    //        屏幕中小方块的位置
+    function blogPosition(lookat) {
 //            判断进入该区域显示内容。
-            if(-80<lookat.x&&lookat.x<77&&40<lookat.y&&lookat.y<170&&-40<lookat.z&&lookat.z<45){
-                document.querySelector('.blog').style.left =-200 + (77-lookat.x)*WIDTH +'px';
-                document.querySelector('.blog').style.top =-200 + (lookat.y-50)*HEIGHT +'px';
-            }
+        if(-80<lookat.x&&lookat.x<77&&40<lookat.y&&lookat.y<170&&-40<lookat.z&&lookat.z<45){
+            document.querySelector('.blog').style.left =-200 + (77-lookat.x)*WIDTH +'px';
+            document.querySelector('.blog').style.top =-200 + (lookat.y-50)*HEIGHT +'px';
         }
+    }
 
 
 
-        function initStats() {
-            var stats = new Stats();
-            stats.setMode(0);
-            stats.domElement.style.position = "absolute";
-            stats.domElement.style.left = "0px";
-            stats.domElement.style.top = "0px";
-            document.body.appendChild(stats.domElement);
-            return stats;
-        }
+    function initStats() {
+        const stats = new Stats();
+        stats.setMode(0);
+        stats.domElement.style.position = "absolute";
+        stats.domElement.style.left = "0px";
+        stats.domElement.style.top = "0px";
+        document.body.appendChild(stats.domElement);
+        return stats;
     }
 </script>
 <script>

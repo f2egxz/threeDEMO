@@ -5,25 +5,50 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
         body {
+            color: #61443e;
+            font-family:Monospace;
+            font-size:13px;
+            text-align:center;
+
             background-color: #bfd1e5;
-            margin: 0;
+            margin: 0px;
             overflow: hidden;
         }
+
+        #info {
+            position: absolute;
+            top: 0px; width: 100%;
+            padding: 5px;
+        }
+
+        a {
+            color: #a06851;
+        }
+
     </style>
 </head>
 <body>
+<div id="info">Physics threejs demo with convex objects breaking in real time<br />Press mouse to throw balls and move the camera.</div>
 <div id="container"><br /><br /><br /><br /><br />Loading...</div>
 
 <script src="./js/three.js"></script>
 <script src="./js/ammo.js"></script>
-<script src="js/controls/OrbitControls.js"></script>
+<script src="./js03/OrbitControls.js"></script>
+<script src="./js03/Detector.js"></script>
 <script src="./js/Stats.js"></script>
-<script src="js/ConvexObjectBreaker.js"></script>
-<script src="js/geometries/ConvexGeometry.js"></script>
+<script src="./js03/ConvexObjectBreaker.js"></script>
+<script src="./js03/ConvexGeometry.js"></script>
 
 <script>
+
+    // Detects webgl
+    if ( ! Detector.webgl ) {
+        Detector.addGetWebGLMessage();
+        document.getElementById( 'container' ).innerHTML = "";
+    }
+
     // - Global variables -
-/^[0-9]*([1][0-9][1-9][0-9])|([1][0-9]{3,})|([2-9][0-9]{2})[0-9]*$/
+
     // Graphics variables
     var container, stats;
     var camera, controls, scene, renderer;
@@ -173,7 +198,7 @@
         quat.set( 0, 0, 0, 1 );
         var ground = createParalellepipedWithPhysics( 40, 1, 40, 0, pos, quat, new THREE.MeshPhongMaterial( { color: 0xFFFFFF } ) );
         ground.receiveShadow = true;
-        textureLoader.load( "textures/grid.png", function( texture ) {
+        textureLoader.load( "./img/grid.png", function( texture ) {
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
             texture.repeat.set( 40, 40 );
@@ -366,7 +391,7 @@
             ball.receiveShadow = true;
             var ballShape = new Ammo.btSphereShape( ballRadius );
             ballShape.setMargin( margin );
-            pos.copy( raycaster.ray.direction );
+             .copy( raycaster.ray.direction );
             pos.add( raycaster.ray.origin );
             quat.set( 0, 0, 0, 1 );
             var ballBody = createRigidBody( ball, ballShape, ballMass, pos, quat );
