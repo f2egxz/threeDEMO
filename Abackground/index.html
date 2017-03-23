@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>background</title>
+    <title>Title</title>
     <style>
         body {
             background:#000;
@@ -12,274 +12,281 @@
             overflow:hidden;
             text-align:center;
         }
+        .blog {
+            position: fixed;
+            top: 0;
+            left: -205px;
+            width: 200px;
+            height: 200px;
+            background-color: #CCC;
+        }
+
+        .tip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
     </style>
 </head>
 <body>
+<div class="blog">
+    <p>留言板</p>
+    <div></div>
+    <input type="text" placeholder="暂未开通，敬请期待...">
+</div>
+
+<div class="tip">
+    按住鼠标左键然后移动鼠标，会有惊喜哦！！
+</div>
+
+<video id="video" style="display: none; position: absolute; left: 15px; top: 75px;"
+       src="./Lil%20Uzi%20Vert%20-%20Go%20Off.mp4" controls="true" autoplay="true" loop></video>
 
 
 <script src="./three.js"></script>
 <script src="./Stats.js"></script>
-<script src="./dat.gui.js"></script>
+<script src="./FirstPersonControls.js"></script>
 <script>
-    var container, stats;
-    var camera, scene, renderer,
-        material_depth;
-    var windowHalfX = window.innerWidth / 2;
-    var windowHalfY = window.innerHeight / 2;
-    var height = window.innerHeight;
-    var postprocessing = { enabled  : true };
-    var shaderSettings = {
-        rings: 3,
-        samples: 4
+    var config = new function () {
+        this.title ={
+            font: './PangMenZhengDao_Regular.json',
+            text : "欢迎！",
+            height : 20,
+            size : 100,
+            curveSegments : 12,
+            bevelThickness : 10,
+            bevelSize : 1,
+            bevelSegments : 3,
+            bevelEnabled : false,
+            material:[
+                new THREE.MeshPhongMaterial( { color: 0xcccccc, envMap: new THREE.CubeTextureLoader()
+                    .setPath( './bgc05/' )
+                    .load(  [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ]  ) } ), // front
+                new THREE.MeshPhongMaterial( { color: 0xffffff,  envMap: new THREE.CubeTextureLoader()
+                    .setPath( './bgc05/' )
+                    .load(  [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ]  ) }  ) // side
+            ],
+            position:[200,-20,900],
+            rotation:[0,1.1,0],
+            scale:[1,1,1]
+        };
+        this.author = {
+            font: './PangMenZhengDao_Regular.json',
+            text : "作者：",
+            size : 20,
+            height:30,
+            material:[
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+            ],
+            position:[400,0,600],
+            rotation:[0,1.2,0],
+        };
+        this.zhi = {
+            font: './PangMenZhengDao_Regular.json',
+            text : "小志",
+            size : 20,
+            height:30,
+            material:[
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
+                new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+            ],
+            /*envMap: cubeCamera.renderTarget.texture }*/
+            position:[-300,0,600],
+            rotation:[0,0.8,0],
+        }
     };
-    var singleMaterial = false;
-    var mouse = new THREE.Vector2();
-    var raycaster = new THREE.Raycaster();
-    var distance = 100;
-    var target = new THREE.Vector3( 0, 20, -50 );
-    var effectController;
-    var planes = [];
-    var leaves = 100;
+    var WIDTH = (window.innerWidth+200)/155;
+    var HEIGHT = (window.innerHeight+200)/110;
     init();
-    animate();
-    function init() {
-        container = document.createElement( 'div' );
-        document.body.appendChild( container );
-        camera = new THREE.PerspectiveCamera( 70, window.innerWidth / height, 1, 3000 );
-        camera.position.y = 150;
-        camera.position.z = 450;
-        scene = new THREE.Scene();
-        scene.add( camera );
-        renderer = new THREE.WebGLRenderer( { antialias: false } );
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, height );
-        renderer.sortObjects = false;
-        container.appendChild( renderer.domElement );
-        material_depth = new THREE.MeshDepthMaterial();
-        //
-        var r = "./bgc05/";
-        var urls = [ r + "posx.jpg", r + "negx.jpg",
-            r + "posy.jpg", r + "negy.jpg",
-            r + "posz.jpg", r + "negz.jpg" ];
-        var textureCube = new THREE.CubeTextureLoader().load( urls );
-        textureCube.format = THREE.RGBFormat;
-        // Skybox
-        var shader = THREE.ShaderLib[ "cube" ];
-        shader.uniforms[ "tCube" ].value = textureCube;
-        var material = new THREE.ShaderMaterial( {
-            fragmentShader: shader.fragmentShader,
-            vertexShader: shader.vertexShader,
-            uniforms: shader.uniforms,
-            depthWrite: false,
-            side: THREE.BackSide
-        } );
-        mesh = new THREE.Mesh( new THREE.BoxGeometry( 1000, 1000, 1000 ), material );
-        camera.add( mesh );
-        // Focusing Floor
-        // var planeGeometry = new THREE.PlaneBufferGeometry( 500, 500, 1, 1 );
-        // var planeMat = new THREE.MeshPhongMaterial(
-        // 	{  map: texture }
-        // );
-        // var plane = new THREE.Mesh(planeGeometry, planeMat );
-        // plane.rotation.x = - Math.PI / 2;
-        // plane.position.y = - 5;
-        // scene.add(plane);
+    function init () {
+        var stats = initStats();
 
-        // Lights
-        // scene.add( new THREE.AmbientLight( 0xffffff ) );
-        // light = new THREE.DirectionalLight( 0xffffff );
-        // light.position.set( 1, 1, 1 );
-        // scene.add( light );
-        scene.add( new THREE.AmbientLight( 0x222222 ) );
-        directionalLight = new THREE.DirectionalLight( 0xffffff, 2 );
-        directionalLight.position.set( 2, 1.2, 10 ).normalize();
-        scene.add( directionalLight );
-        directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
-        directionalLight.position.set( -2, 1.2, -10 ).normalize();
-        scene.add( directionalLight );
-//        initPostprocessing();
-        renderer.autoClear = false;
-        renderer.domElement.style.position = 'absolute';
-        renderer.domElement.style.left = "0px";
-        stats = new Stats();
-        container.appendChild( stats.domElement );
-//        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-        document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-        document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-        effectController  = {
-            enabled: true,
-            jsDepthCalculation: true,
-            shaderFocus: false,
-            fstop: 2.2,
-            maxblur: 1.0,
-            showFocus: false,
-            focalDepth: 2.8,
-            manualdof: false,
-            vignetting: false,
-            depthblur: false,
-            threshold: 0.5,
-            gain: 2.0,
-            bias: 0.5,
-            fringe: 0.7,
-            focalLength: 35,
-            noise: true,
-            pentagon: false,
-            dithering: 0.0001
-        };
-        var matChanger = function( ) {
-            for (var e in effectController) {
-                if (e in postprocessing.bokeh_uniforms)
-                    postprocessing.bokeh_uniforms[ e ].value = effectController[ e ];
-            }
-            postprocessing.enabled = effectController.enabled;
-            postprocessing.bokeh_uniforms[ 'znear' ].value = camera.near;
-            postprocessing.bokeh_uniforms[ 'zfar' ].value = camera.far;
-            camera.setFocalLength(effectController.focalLength);
-        };
-        var gui = new dat.GUI();
-        gui.add( effectController, "enabled" ).onChange( matChanger );
-        gui.add( effectController, "jsDepthCalculation" ).onChange( matChanger );
-        gui.add( effectController, "shaderFocus" ).onChange( matChanger );
-        gui.add( effectController, "focalDepth", 0.0, 200.0 ).listen().onChange( matChanger );
-        gui.add( effectController, "fstop", 0.1, 22, 0.001 ).onChange( matChanger );
-        gui.add( effectController, "maxblur", 0.0, 5.0, 0.025 ).onChange( matChanger );
-        gui.add( effectController, "showFocus" ).onChange( matChanger );
-        gui.add( effectController, "manualdof" ).onChange( matChanger );
-        gui.add( effectController, "vignetting" ).onChange( matChanger );
-        gui.add( effectController, "depthblur" ).onChange( matChanger );
-        gui.add( effectController, "threshold", 0, 1, 0.001 ).onChange( matChanger );
-        gui.add( effectController, "gain", 0, 100, 0.001 ).onChange( matChanger );
-        gui.add( effectController, "bias", 0,3, 0.001 ).onChange( matChanger );
-        gui.add( effectController, "fringe", 0, 5, 0.001 ).onChange( matChanger );
-        gui.add( effectController, "focalLength", 16, 80, 0.001 ).onChange( matChanger );
-        gui.add( effectController, "noise" ).onChange( matChanger );
-        gui.add( effectController, "dithering", 0, 0.001, 0.0001 ).onChange( matChanger );
-        gui.add( effectController, "pentagon" ).onChange( matChanger );
-        gui.add( shaderSettings, "rings", 1, 8).step(1).onChange( shaderUpdate );
-        gui.add( shaderSettings, "samples", 1, 13).step(1).onChange( shaderUpdate );
-//        matChanger();
+//------------------------------------------
+        var scene = new THREE.Scene();
+        scene.background = new THREE.CubeTextureLoader()
+            .setPath( './bgc05/' )
+            .load(  [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ]  );
+
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+        var cameraControls = new THREE.FirstPersonControls(camera);
+        camera.position.set(0,100,100);
+        scene.add(camera);
+
+        var renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setClearColor(new THREE.Color(0xffffff, 1.0));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.body.appendChild(renderer.domElement);
+
+//     add video
+        var video = document.getElementById('video');
+        var videoTexture = new THREE.VideoTexture(video);
+        videoTexture.minFilter = THREE.LinearFilter;
+        videoTexture.magFilter = THREE.LinearFilter;
+//      add plane
+        var planeGeometry = new THREE.PlaneGeometry(300, 200);
+        var planeMaterial = new THREE.MeshLambertMaterial({map: videoTexture,side: THREE.DoubleSide});
+        var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.receiveShadow = true;
+        // rotate and position the plane
+        plane.rotation.y = 0.5 * Math.PI;
+        plane.position.set(-400,137,-200)
+        scene.add(plane)
+
+
+//        var ambientLight = new THREE.AmbientLight(0xffffff)
+//        scene.add(ambientLight);
+
+//        spotlight target
+        var targetObject = new THREE.Object3D();
+        targetObject.position.set(0,0,900)
+        scene.add(targetObject);
+
+
+        var spotLight = new THREE.SpotLight( 0xffffff,1 );
+//        spotLight.angle = 0.5
+        spotLight.position.set( -500, 130, 450 );
+        spotLight.castShadow = true;
+        scene.add( spotLight );
+        spotLight.target = targetObject;
+//        var spotLightHelper = new THREE.SpotLightHelper( spotLight );
+//        scene.add( spotLightHelper );
+
+        var pointLight01 = new THREE.PointLight(0xffd990);
+        pointLight01.position.set(450,40,650);
+        scene.add( pointLight01 );
+//        var pointLightHelper01 = new THREE.PointLightHelper( pointLight01, 3 );
+//        scene.add( pointLightHelper01 );
+
+        var pointLight02 = new THREE.PointLight(0xf3cc95);
+        pointLight02.position.set(450,20,800);
+        scene.add( pointLight02 );
+//        var pointLightHelper02 = new THREE.PointLightHelper( pointLight02, 3 );
+//        scene.add( pointLightHelper02 );
+
+        var pointLight03 = new THREE.PointLight(0xeaab7c);
+        pointLight03.position.set(-450,20,470);
+        scene.add( pointLight03 );
+//        var pointLightHelper03 = new THREE.PointLightHelper( pointLight03, 3 );
+//        scene.add( pointLightHelper03 );
+
+        var pointLight04 = new THREE.PointLight(0xff0000);
+        pointLight04.position.set(-450,20,850);
+        scene.add( pointLight04 );
+//        var pointLightHelper04 = new THREE.PointLightHelper( pointLight04, 3 );
+//        scene.add( pointLightHelper04 );
+
+        fontRender(config.title);
+        fontRender(config.author);
+        fontRender(config.zhi);
+
+//        改变屏幕大小时执行
         window.addEventListener( 'resize', onWindowResize, false );
-    }
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-    }
-    function onDocumentMouseMove( event ) {
-        mouse.x = ( event.clientX - windowHalfX ) / windowHalfX;
-        mouse.y = - ( event.clientY - windowHalfY ) / windowHalfY;
-        postprocessing.bokeh_uniforms[ 'focusCoords' ].value.set(event.clientX / window.innerWidth, 1-event.clientY / window.innerHeight);
-    }
-    function onDocumentTouchStart( event ) {
-        if ( event.touches.length == 1 ) {
-            event.preventDefault();
-            mouse.x = ( event.touches[ 0 ].pageX - windowHalfX ) / windowHalfX;
-            mouse.y = - ( event.touches[ 0 ].pageY - windowHalfY ) / windowHalfY;
+        function onWindowResize() {
+            cameraControls = new THREE.FirstPersonControls(camera);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
         }
-    }
-    function onDocumentTouchMove( event ) {
-        if ( event.touches.length == 1 ) {
-            event.preventDefault();
-            mouse.x = ( event.touches[ 0 ].pageX - windowHalfX ) / windowHalfX;
-            mouse.y = - ( event.touches[ 0 ].pageY - windowHalfY ) / windowHalfY;
-        }
-    }
-    function initPostprocessing() {
-        postprocessing.scene = new THREE.Scene();
-        postprocessing.camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2,  window.innerHeight / 2, window.innerHeight / - 2, -10000, 10000 );
-        postprocessing.camera.position.z = 100;
-        postprocessing.scene.add( postprocessing.camera );
-        var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat };
-        postprocessing.rtTextureDepth = new THREE.WebGLRenderTarget( window.innerWidth, height, pars );
-        postprocessing.rtTextureColor = new THREE.WebGLRenderTarget( window.innerWidth, height, pars );
-        var bokeh_shader = THREE.BokehShader;
-        postprocessing.bokeh_uniforms = THREE.UniformsUtils.clone( bokeh_shader.uniforms );
-        postprocessing.bokeh_uniforms[ "tColor" ].value = postprocessing.rtTextureColor.texture;
-        postprocessing.bokeh_uniforms[ "tDepth" ].value = postprocessing.rtTextureDepth.texture;
-        postprocessing.bokeh_uniforms[ "textureWidth" ].value = window.innerWidth;
-        postprocessing.bokeh_uniforms[ "textureHeight" ].value = height;
-        postprocessing.materialBokeh = new THREE.ShaderMaterial( {
-            uniforms: postprocessing.bokeh_uniforms,
-            vertexShader: bokeh_shader.vertexShader,
-            fragmentShader: bokeh_shader.fragmentShader,
-            defines: {
-                RINGS: shaderSettings.rings,
-                SAMPLES: shaderSettings.samples
-            }
-        } );
-        postprocessing.quad = new THREE.Mesh( new THREE.PlaneBufferGeometry( window.innerWidth, window.innerHeight ), postprocessing.materialBokeh );
-        postprocessing.quad.position.z = - 500;
-        postprocessing.scene.add( postprocessing.quad );
-    }
-    function shaderUpdate() {
-        postprocessing.materialBokeh.defines.RINGS = shaderSettings.rings;
-        postprocessing.materialBokeh.defines.SAMPLES = shaderSettings.samples;
-        postprocessing.materialBokeh.needsUpdate = true;
-    }
-    function animate() {
-        requestAnimationFrame( animate, renderer.domElement );
+
+
+
+        var clock = new THREE.Clock();
         render();
-        stats.update();
-    }
-    function linearize(depth) {
-        var zfar = camera.far;
-        var znear = camera.near;
-        return -zfar * znear / (depth * (zfar - znear) - zfar);
-    }
-    function smoothstep(near, far, depth) {
-        var x = saturate( (depth - near) / (far - near));
-        return x * x * (3- 2*x);
-    }
-    function saturate(x) {
-        return Math.max(0, Math.min(1, x));
-    }
-    function render() {
-        var time = Date.now() * 0.00015;
-        camera.position.x = Math.cos(time) * 400;
-        camera.position.z = Math.sin(time) * 500;
-        camera.position.y = Math.sin(time / 1.4) * 100;
-        camera.lookAt( target );
-        camera.updateMatrixWorld();
-        if ( effectController.jsDepthCalculation ) {
-            raycaster.setFromCamera( mouse, camera );
-            var intersects = raycaster.intersectObjects( scene.children, true );
-            if ( intersects.length > 0 ) {
-                var targetDistance = intersects[ 0 ].distance;
-                distance += (targetDistance - distance) * 0.03;
-                var sdistance = smoothstep(camera.near, camera.far, distance);
-                var ldistance = linearize(1 -  sdistance);
-                // (Math.random() < 0.1) && console.log('moo', targetDistance, distance, ldistance);
-//                postprocessing.bokeh_uniforms[ 'focalDepth' ].value = ldistance;
-                effectController['focalDepth'] = ldistance;
-            }
+        function render() {
+            stats.update();
+//            spotLightHelper.update();
+            blogPosition(cameraControls.cameraTarget);
+
+            var delta = clock.getDelta();
+            cameraControls.update(delta)
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
         }
-//        for (i=0;i<leaves;i++) {
-//            plane = planes[i];
-//            plane.rotation.x += plane.rotation.dx;
-//            plane.rotation.y += plane.rotation.dy;
-//            plane.rotation.z += plane.rotation.dz;
-//            plane.position.y -= 2;
-//            plane.position.x += plane.position.dx;
-//            plane.position.z += plane.position.dz;
-//            if (plane.position.y < 0) plane.position.y += 300;
-//        }
-//        if ( postprocessing.enabled ) {
-//            renderer.clear();
-//            // Render scene into texture
-//            scene.overrideMaterial = null;
-//            renderer.render( scene, camera, postprocessing.rtTextureColor, true );
-//            // Render depth into texture
-//            scene.overrideMaterial = material_depth;
-//            renderer.render( scene, camera, postprocessing.rtTextureDepth, true );
-//            // Render bokeh composite
-//            renderer.render( postprocessing.scene, postprocessing.camera );
-//        } else {
-//            scene.overrideMaterial = null;
-//            renderer.clear();
-//            renderer.render( scene, camera );
-//        }
+
+        /**
+         * 渲染文字
+         * @param config
+         *         config.font { url} 必须的 文字字体路径
+         *         config.text { string} 必须的 要渲染的文字
+         *         config.size  { num float} 必须的 文字大小
+         *         config.material { array } 必须的 文字的材料
+         *         config.height { num float} 默认50 文字的厚度，
+         *         config.curveSegments { num Integer} 默认12  曲线上点的个数
+         *         config.bevelEnabled  { bool} 默认false  是否打开斜面
+         *         config.bevelThickness{ num float} 默认10  如何深入文本斜面
+         *         config.bevelSize     { num float} 默认8  离文本轮廓多远
+         *         config.bevelSegments { num Integer} 默认3  锥段数
+         *         config.position { array } 默认[0,0,0] 位置
+         *         config.rotation { array } 默认[0,0,0] 旋转
+         *         config.scale    { array } 默认[1,1,1] 缩放
+         */
+        function fontRender (config) {
+            const Fontloader = new THREE.FontLoader();
+            let Mesh = new THREE.Object3D();
+            Fontloader.load(
+                config.font,
+                function ( font ) {
+                    const _height = config.height||50;
+                    const _curveSegments  = config.curveSegments || 12;
+                    const _bevelEnabled   = config.bevelEnabled || false;
+                    const _bevelThickness = config.bevelThickness || 10;
+                    const _bevelSize      = config.bevelSize || 8;
+                    const _bevelSegments  = config.bevelSegments || 3;
+                    const Geo = new THREE.TextGeometry( config.text, {
+                        font: font,
+                        size: config.size,
+                        height: _height,
+                        curveSegments: _curveSegments,
+                        bevelThickness: _bevelThickness,
+                        bevelSize: _bevelSize,
+                        bevelEnabled: _bevelEnabled,
+                        bevelSegments: _bevelSegments
+                    });
+                    Mesh = new THREE.Mesh( Geo, config.material );
+                    const _position = config.position||[0,0,0];
+                    Mesh.position.x = _position[0];
+                    Mesh.position.y = _position[1];
+                    Mesh.position.z = _position[2];
+                    const _rotation = config.rotation||[0,0,0];
+                    Mesh.rotation.x = _rotation[0]*Math.PI;
+                    Mesh.rotation.y = _rotation[1]*Math.PI;
+                    Mesh.rotation.z = _rotation[2]*Math.PI;
+                    const _scale = config.scale||[1,1,1];
+                    Mesh.scale.x = _scale[0];
+                    Mesh.scale.y = _scale[1];
+                    Mesh.scale.z = _scale[2];
+                    Mesh.castShadow = true;
+                    scene.add(Mesh)
+                }
+            );
+        }
+
+    }
+    //        屏幕中留言窗口
+    function blogPosition(lookat) {
+//            判断进入该区域显示内容。
+        if(-80<lookat.x&&lookat.x<77&&40<lookat.y&&lookat.y<170&&-40<lookat.z&&lookat.z<45){
+            document.querySelector('.blog').style.left =-200 + (77-lookat.x)*WIDTH +'px';
+            document.querySelector('.blog').style.top =-200 + (lookat.y-50)*HEIGHT +'px';
+        }
+    }
+
+    function initStats() {
+        const stats = new Stats();
+        stats.setMode(0);
+        stats.domElement.style.position = "absolute";
+        stats.domElement.style.left = "0px";
+        stats.domElement.style.top = "0px";
+        document.body.appendChild(stats.domElement);
+        return stats;
     }
 </script>
+<script>
 
+</script>
 </body>
 </html>

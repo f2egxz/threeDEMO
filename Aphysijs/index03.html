@@ -28,7 +28,7 @@
     </style>
 </head>
 <body>
-<div id="info">Physics threejs demo with convex objects breaking in real time<br />Press mouse to throw balls and move the camera.</div>
+<div id="info">点击鼠标左键投出小球，按鼠标左键移动视野</div>
 <div id="container"><br /><br /><br /><br /><br />Loading...</div>
 
 <script src="./js/three.js"></script>
@@ -391,7 +391,7 @@
             ball.receiveShadow = true;
             var ballShape = new Ammo.btSphereShape( ballRadius );
             ballShape.setMargin( margin );
-             .copy( raycaster.ray.direction );
+            pos.copy( raycaster.ray.direction );
             pos.add( raycaster.ray.origin );
             quat.set( 0, 0, 0, 1 );
             var ballBody = createRigidBody( ball, ballShape, ballMass, pos, quat );
